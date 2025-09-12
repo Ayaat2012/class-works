@@ -5,7 +5,7 @@ from tkinter import *
 
 window = Tk()
 window.title = ('Tkinter Sample Window')
-window.geometry = ('300 x 300')
+window.geometry = ('300x300')
 
 #Label
 greeting = Label(text="Hello user", fg='black', bg='white')
