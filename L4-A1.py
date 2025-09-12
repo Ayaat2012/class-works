@@ -12,7 +12,7 @@ greeting = Label(text="Hello user", fg='black', bg='white')
 #Button
 button = Button(text="Click me", fg='white', bg='black')
 #Entry
-entry = Entry(fg='yellow', bg='lightblue', width=100)
+entry = Entry(fg='purple', bg='lightblue', width=100)
 
 greeting.pack()
 button.pack()
