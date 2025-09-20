@@ -1,0 +1,97 @@
+from tkinter import *
+from tkinter import messagebox
+from PIL import Image, ImageTk
+
+# Setting up main window
+root = Tk()
+root.title("Denomination Calculator")
+root.configure(bg='light blue')
+root.geometry('600x400')
+
+# Adding image and labels in the main window
+upload = Image.open("img.jpg")
+# Resizing the image using resize() method
+upload = upload.resize((300, 300))
+# Convert this image into Tkinter compatable image
+image = ImageTk.PhotoImage(upload)
+label = Label(root, image=image, bg='blue')
+label.place(x=180, y=20)
+
+label1 = Label(root,
+               text="Hey User! Welcome to Denomination Counter Application",
+               bg='light blue')
+label1.place(x=180, y=340)
+
+#Function to display a messagebox and proceed if OK is clicked
+def msg():
+    MsgBox = messagebox.showinfo(
+        "Alert", "Do you want to calculate the denomination coubt?")
+    if MsgBox == 'ok':
+        topwin()
+
+# Adding buttons to the main window
+button1 = Button(root,
+                 text="Let's get started!",
+                 command=msg,
+                 bg='brown', fg='white')
+button1.place(x=260, y=360)
+
+#Function for opening new/Top window
+def topwin():
+    top = Toplevel()
+    top.title("Denomnation Calculator")
+    top.configure(bg='light grey')
+    top.geometry('600x350')
+
+
+    label = Label(top, text="Enter total amount", bg='light grey')
+    entry = Entry(top)
+    lb1 = Label(top, text="Here are number of notes for each denomination", bg='light grey')
+
+    l1 = Label(top, text="2000", bg='light grey')
+    l2 = Label(top, text="500", bg='light grey')
+    l3 = Label(top, text="100", bg='light grey')
+
+    t1 = Entry(top)
+    t2 = Entry(top)
+    t3 = Entry(top)
+
+    def calculator():
+        try:
+            global amount
+            amount = int(entry.get())
+            note2000 = amount // 2000  #3400//2000 = 1
+            amount %= 2000             #3400%2000 = 1400
+            note500 = amount // 500    #1400//500 = 2
+            amount %= 500              #1400%500 = 400
+            note100 = amount // 100    #400//100 = 4
+
+            t1.delete(0, END) #This removes everything from index 0 (start) to END (last character)
+            t2.delete(0, END)
+            t3.delete(0, END)
+
+            t1.insert(END, str(note2000))
+            t2.insert(END, str(note500))
+            t3.insert(END, str(note100))
+        except ValueError:
+            messagebox.showerror("Error", "Please enter a valid number.")
+
+    btn = Button(top, text='Calculate', command=calculator, bg='brown', fg='white')
+
+    #Centering widgets in the Top window
+    label.place(x=200, y=50)
+    entry.place(x=200, y=80)
+    btn.place(x=240, y=120)
+    lb1.place(x=140, y=170)
+
+    l1.place(x=180, y=200)
+    l2.place(x=180, y=230)
+    l3.place(x=180, y=260)
+
+    t1.place(x=270, y=200)
+    t2.place(x=270, y=230)
+    t3.place(x=270, y=260)
+
+    top.mainloop()
+
+root.mainloop()
